@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Welcome } from './welcome/welcome';
 import { PhoneVerification } from './phone-verification/phone-verification';
 import { PhoneOtpVerification } from './phone-otp-verification/phone-otp-verification';
+import { Chat } from './chat/chat';
 
 export const routes: Routes = [
 
@@ -14,6 +15,9 @@ export const routes: Routes = [
     pathMatch: 'full' 
     },
     { path: 'verify-otp',component:PhoneOtpVerification,
+    pathMatch: 'full' 
+    },
+     { path: 'chat',component:Chat,
     pathMatch: 'full' 
     },
 ];

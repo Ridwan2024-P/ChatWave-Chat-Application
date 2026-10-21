@@ -54,7 +54,7 @@ verify(): void {
     }
 
     if (this.auth.verifyOtp(this.code())) {
-      void this.router.navigateByUrl('/');
+      void this.router.navigateByUrl('/chat');
     } else {
       this.loading.set(false);
       this.error.set('Incorrect code. Check the demo code above and try again.');
