@@ -62,17 +62,35 @@ verify(): void {
   }, 500);
 }
 
-resend(): void {
-  if (this.seconds() > 0) return;
 
+resend(): void {
   const phone = this.auth.pendingPhone();
+
   if (!phone) return;
 
-  this.mockOtp.set(this.auth.requestOtp(phone));
-  this.code.set('');
-  this.error.set(null);
-  this.startCountdown();
+  const remaining = this.auth.getOtpCooldown(phone);
+
+  if (remaining > 0) {
+    this.error.set(
+      `OTP limit reached. Try again in ${Math.ceil(remaining / 60000)} minutes.`
+    );
+    return;
+  }
+
+  try {
+    this.mockOtp.set(this.auth.requestOtp(phone));
+    this.code.set('');
+    this.error.set(null);
+    this.startCountdown();
+  } catch (error) {
+    this.error.set(
+      error instanceof Error
+        ? error.message
+        : 'Unable to request OTP.'
+    );
+  }
 }
+
 
 
   changeNumber(): void {
