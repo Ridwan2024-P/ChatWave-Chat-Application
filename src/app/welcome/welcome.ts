@@ -4,7 +4,7 @@ import { LucideArrowRight } from '@lucide/angular';
 import { AuthShell } from '../auth-shell/auth-shell';
 
 @Component({
-  imports: [AuthShell],
+  imports: [AuthShell,RouterLink],
   selector: 'app-welcome',
   styleUrl: './welcome.css',
   templateUrl: './welcome.html',
