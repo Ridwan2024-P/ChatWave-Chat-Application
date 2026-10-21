@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { Welcome } from './welcome/welcome';
+import { RouterOutlet } from '@angular/router';
+import { AuthShell } from './auth-shell/auth-shell';
 
 
 @Component({
-  imports: [Welcome],
+  imports: [RouterOutlet, AuthShell, Welcome],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
