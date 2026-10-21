@@ -29,28 +29,51 @@ export class PhoneOtpVerification implements OnDestroy{
 
   constructor() { this.startCountdown(); }
 
-  verify(): void {
-    if (this.loading()) return;
-    if (!/^\d{6}$/.test(this.code())) { this.error.set('Enter all 6 digits of the code.'); return; }
-    this.loading.set(true);
-    window.setTimeout(() => {
-      if (this.auth.verifyOtp(this.code())) {
-        void this.router.navigateByUrl('/');
-      } else {
-        this.loading.set(false);
-        this.error.set('Incorrect code. Check the demo code above and try again.');
-      }
-    }, 500);
+  
+verify(): void {
+  if (this.loading()) return;
+
+  // OTP expires after 30 seconds
+  if (this.seconds() <= 0) {
+    this.error.set('OTP expired. Please request a new code.');
+    return;
   }
 
-  resend(): void {
-    const phone = this.auth.pendingPhone();
-    if (!phone) return;
-    this.mockOtp.set(this.auth.requestOtp(phone));
-    this.code.set('');
-    this.error.set(null);
-    this.startCountdown();
+  if (!/^\d{6}$/.test(this.code())) {
+    this.error.set('Enter all 6 digits of the code.');
+    return;
   }
+
+  this.loading.set(true);
+
+  window.setTimeout(() => {
+    if (this.seconds() <= 0) {
+      this.loading.set(false);
+      this.error.set('OTP expired. Please request a new code.');
+      return;
+    }
+
+    if (this.auth.verifyOtp(this.code())) {
+      void this.router.navigateByUrl('/');
+    } else {
+      this.loading.set(false);
+      this.error.set('Incorrect code. Check the demo code above and try again.');
+    }
+  }, 500);
+}
+
+resend(): void {
+  if (this.seconds() > 0) return;
+
+  const phone = this.auth.pendingPhone();
+  if (!phone) return;
+
+  this.mockOtp.set(this.auth.requestOtp(phone));
+  this.code.set('');
+  this.error.set(null);
+  this.startCountdown();
+}
+
 
   changeNumber(): void {
     this.auth.clearPending();
