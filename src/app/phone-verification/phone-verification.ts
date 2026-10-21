@@ -22,6 +22,7 @@ export class PhoneVerification {
     this.error.set(null);
     this.loading.set(true);
     window.setTimeout(() => {
+      this.auth.requestOtp(result.e164);
       void this.router.navigateByUrl('/verify-otp');
     }, 600);
   }
