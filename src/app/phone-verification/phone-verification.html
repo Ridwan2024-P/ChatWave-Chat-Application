@@ -1,31 +1,68 @@
-      <app-auth-shell>
-      <form class="rounded-2xl border border-slate-200 bg-white p-6 shadow-card sm:p-8" (submit)="$event.preventDefault(); submit()" novalidate>
-        <p class="text-xs font-semibold tracking-wider text-wa-dark uppercase">Step 1 of 2</p>
-        <div class="mt-2 mb-5 flex gap-1.5" aria-hidden="true"><span class="h-1 flex-1 rounded-full bg-wa"></span><span class="h-1 flex-1 rounded-full bg-slate-200"></span></div>
-        <h1 class="text-2xl font-bold tracking-tight">Enter your phone number</h1>
-        <p class="mt-1.5 text-slate-600">We will send a verification code to confirm it is you.</p>
-        <div class="mt-6">
-          <label for="phone" class="mb-2 block text-sm font-medium text-slate-700">Mobile number</label>
-          <div class="flex gap-2">
-            <div class="relative">
-              <svg class="pointer-events-none absolute top-1/2 left-3 h-4 w-6 -translate-y-1/2 rounded-sm" viewBox="0 0 30 20" aria-hidden="true">
-                <rect width="30" height="20" fill="#006a4e"/><circle cx="13" cy="10" r="6" fill="#f42a41"/>
-              </svg>
-              <select class="field w-28 appearance-none pl-11" aria-label="Country code">
-                <option value="BD" selected>+88</option>
-                <option value="IN" disabled>+91 (demo: BD only)</option>
-              </select>
-            </div>
-            <input id="phone" class="field" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="01712 345678" maxlength="11"
-                   [value]="phone()" (input)="phone.set($any($event.target).value)"
-                   [attr.aria-invalid]="error() ? 'true' : null" [attr.aria-describedby]="error() ? 'phone-error' : null"
-                   [class.border-red-500]="error()" />
-          </div>
-          @if (error()) { <p id="phone-error" role="alert" class="mt-1.5 text-sm text-red-600">{{ error() }}</p> }
+<app-auth-shell>
+  <form
+    class="rounded-2xl border border-slate-200 bg-white p-6 shadow-card sm:p-8"
+    (submit)="$event.preventDefault(); submit()"
+    novalidate
+  >
+    <p class="text-xs font-semibold tracking-wider text-wa-dark uppercase">Step 1 of 2</p>
+    <div class="mt-2 mb-5 flex gap-1.5" aria-hidden="true">
+      <span class="h-1 flex-1 rounded-full bg-wa"></span
+      ><span class="h-1 flex-1 rounded-full bg-slate-200"></span>
+    </div>
+    <h1 class="text-2xl font-bold tracking-tight">Enter your phone number</h1>
+    <p class="mt-1.5 text-slate-600">We will send a verification code to confirm it is you.</p>
+    <div class="mt-6">
+      <label for="phone" class="mb-2 block text-sm font-medium text-slate-700">Mobile number</label>
+      <div class="flex gap-2">
+        <div class="relative">
+          <svg
+            class="pointer-events-none absolute top-1/2 left-3 h-4 w-6 -translate-y-1/2 rounded-sm"
+            viewBox="0 0 30 20"
+            aria-hidden="true"
+          >
+            <rect width="30" height="20" fill="#006a4e" />
+            <circle cx="13" cy="10" r="6" fill="#f42a41" />
+          </svg>
+          <select class="field w-28 appearance-none pl-11" aria-label="Country code">
+            <option value="BD" selected>+88</option>
+            <option value="IN" disabled>+91 (demo: BD only)</option>
+          </select>
         </div>
-        <button type="submit" class="btn-primary mt-6 w-full" [disabled]="loading()">
-          @if (loading()) { <span class="size-4 animate-spin rounded-full border-2 border-wa-deep/30 border-t-wa-deep"></span> Sending… } @else { Continue }
-        </button>
-      </form>
-      <a class="btn-ghost mt-3 w-full"><svg lucideArrowLeft class="size-4"></svg> Back</a>
-    </app-auth-shell>
+        <input
+          id="phone"
+          class="field"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel-national"
+          placeholder="01712 345678"
+          maxlength="11"
+          [value]="phone()"
+          (input)="phone.set($any($event.target).value)"
+          [attr.aria-invalid]="error() ? 'true' : null"
+          [attr.aria-describedby]="error() ? 'phone-error' : null"
+          [class.border-red-500]="error()"
+        />
+      </div>
+      @if (error()) {
+        <p id="phone-error" role="alert" class="mt-1.5 text-sm text-red-600">{{ error() }}</p>
+      }
+    </div>
+    <button type="submit" class="btn-primary mt-6 w-full" [disabled]="loading()">
+      @if (loading()) {
+        <span
+          class="size-4 animate-spin rounded-full border-2 border-wa-deep/30 border-t-wa-deep"
+        ></span>
+        Sending…
+      } @else {
+        Continue
+      }
+    </button>
+  </form>
+  <a
+    (click)="goBack()"
+    class="btn-ghost mt-3 w-full flex items-center justify-start gap-2 cursor-pointer"
+  >
+    <svg lucideArrowLeft class="size-4"></svg>
+    Back
+  </a>
+</app-auth-shell>

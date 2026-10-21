@@ -20,4 +20,9 @@ export const routes: Routes = [
      { path: 'chat',component:Chat,
     pathMatch: 'full' 
     },
+    {
+    path: '**',
+    component:Welcome,
+    pathMatch: 'full',
+  },
 ];
