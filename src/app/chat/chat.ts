@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 import {  ChatSidebar } from '../sidebar/sidebar';
+import { Header } from '../header/header';
 
 @Component({
-  imports: [ChatSidebar],
+  imports: [ChatSidebar, Header],
   selector: 'app-chat',
   styleUrl: './chat.css',
   templateUrl: './chat.html',

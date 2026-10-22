@@ -8,7 +8,7 @@ export const routes: Routes = [
 
     {
     path: '',
-    component:Chat,
+    component:Welcome,
     pathMatch: 'full',
   },
    { path: 'verify-phone',component:PhoneVerification,

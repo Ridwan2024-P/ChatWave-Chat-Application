@@ -1,0 +1,34 @@
+
+<header class="chat-header">
+  <div class="ch-person">
+    <div class="ch-text">
+      <span class="ch-name">ChatWave</span>
+    </div>
+  </div>
+  <div class="ch-actions">
+    <div class="ch-menu-wrap">
+      <button
+        type="button"
+        class="ch-profile-button"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen"
+        aria-label="Open profile menu"
+      >
+        <span class="ch-avatar">C</span>
+        <span class="ch-profile-name">ChatWave User</span>
+      </button>
+      @if (menuOpen) {
+        <div class="ch-menu">
+          <div class="ch-menu-divider"></div>
+          <button
+            type="button"
+            class="ch-logout-item"
+            (click)="logout()"
+          >
+            <span>Logout</span>
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</header>

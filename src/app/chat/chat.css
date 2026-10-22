@@ -1,0 +1,55 @@
+.dashboard-wrapper {
+  display: flex !important;
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--card);
+}
+
+.dashboard-wrapper > app-sidebar {
+  display: block;
+  flex: 0 0 345px;
+  width: 345px;
+  min-width: 345px;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    flex-basis 0.25s ease;
+}
+
+.dashboard-wrapper:has(> app-sidebar hlm-sidebar[data-state='collapsed']) > app-sidebar {
+  flex: 0 0 80px;
+  width: 80px;
+  min-width: 80px;
+}
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+@media (max-width: 767px) {
+  .dashboard-wrapper > app-sidebar,
+  .dashboard-wrapper:has(> app-sidebar hlm-sidebar[data-state='collapsed']) > app-sidebar {
+    flex: 0 0 0;
+    width: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .dashboard-main {
+    width: 100%;
+  }
+}
+
+
+
